@@ -9,6 +9,7 @@ class App extends Component {
     user: {
       uid: '023502',
       userName: '', 
+      email: '',
       
     }
   }
@@ -16,6 +17,7 @@ class App extends Component {
     const user = [...this.state.user]; //breaks an array into varius pieces
     console.log(user)
     user.userName = userName;
+    //user.email = email;
    
    
     this.setState({user});

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChatHeader = () => {
     return (
-        <div className="ChatHeader" style={styles.ChatHeader}>
+        <div className="ChatHeader" style={styles.header}>
             <div className="roomInfo">
                 <h2 style={styles.h2}>#general</h2>
                 <p style = {styles.p}>Announcements and general chat</p>
@@ -11,7 +11,7 @@ const ChatHeader = () => {
     )
 }
 const styles = {
-    ChatHeader: {
+    header: {
         backgroundColor: '#f3f3f3',
         borderBottom: '1px solid #ccc',
         height: '3rem',
