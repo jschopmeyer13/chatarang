@@ -20,10 +20,10 @@ const Sidebar = (props) =>{
                     ...styles.h1,
                 }}>XTBC 18</h1>
                 <nav className="RoomList" style ={styles.children}>
-                    <h2>Rooms</h2>
-                    <ul>
-                        <li><a href="#">general</a></li>
-                        <li><a href="#">random</a></li>
+                    <h2 style={styles.h2}>Rooms</h2>
+                    <ul style={styles.ul}>
+                        <li style={styles.li}><a href="#" style={styles.a}>general</a></li>
+                        <li style={styles.li}><a href="#" style={styles.a}>random</a></li>
                     </ul>
                 </nav>
           </aside>
@@ -51,6 +51,31 @@ const styles = {
         marginTop: 0,
 
     },
+    ///////////////////////////////////
+    h2: { //.RoomList 
+        fontSize: '1rem',
+      },
+      
+      ul: {
+        listStyle: 'none',
+        marginLeft: 0,
+        paddingLeft: 0,
+      },
+      
+      li: {
+        marginBottom: '0.5rem',
+      },
+      a: { //.RoomList li
+        display:'block',
+        color: 'whitesmoke',
+        textDecoration: 'none',
+      },
+    //   .RoomList li a::before {
+    //     content: '# ';
+    //   }
+    //   .RoomList li a:hover {
+    //     background-color: rgba(255, 255, 255, 0.2);
+    //   }
 }
 
 export default Sidebar;
