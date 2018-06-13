@@ -45,9 +45,11 @@ class Chat extends Component {
     }
 }
 const styles = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
+    Chat: {
+        flex: '1',
+        display: 'flex',
+        flexDirection: 'column',
+    }
 };
 
 export default Chat;
