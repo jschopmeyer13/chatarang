@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class Sign extends Component {
     state = {
        userName: '',
@@ -19,7 +20,6 @@ class Sign extends Component {
     //addUserName=(usr)=> {
         
     render(){
-        <h1> Sign in </h1>
         return (
             
             <form className="SignInForm" style={styles.SignForm}  onSubmit= {this.handleSubmit}>
@@ -30,9 +30,10 @@ class Sign extends Component {
                         placeholder="Type username..."
                         value={this.state.userName} 
                         onChange={this.handleChange}
+                        style={styles.input}
                         
                     />
-                    <button type="submit">Sign In</button>
+                    <button type="submit" style={styles.button}>Sign In</button>
                 </form>
 
         )
@@ -40,8 +41,14 @@ class Sign extends Component {
 
 }
 const styles = {
+   
     SignForm: {
-        border: '1px navy solid',
+        // backgroundColor: 'aliceBlue' darkslateblue,
+        height: '20%',
+        borderLeft: '10px midnightblue ridge',
+        borderRight: '10px midnightblue ridge',
+        borderTop: '2px midnightblue solid', 
+        borderBottom: '2px midnightblue solid',
         textAlign: 'center',
         fontStyle: 'sans-serif',
         marginTop: '20px',
@@ -49,11 +56,25 @@ const styles = {
         margin: 'auto',
         width: '50%',
         
+        
     },
     h1: {
         fontStyle: 'sans-serif',
-        color: 'navy',
-        fontSize: '30px',
+        color: 'midnightblue',
+        fontSize: '40px',
+    },
+    input:{
+        fontStyle: 'sans-serif',
+        fontSize: '15px',
+        border: "1px midnightblue solid",
+        
+    },
+
+    button:{
+        color: 'white',
+        backgroundColor: 'midnightblue',
+        border: '1px midnightblue solid ',
+        fontSize: '15px',
     }
 }
 export default Sign;
