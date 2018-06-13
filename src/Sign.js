@@ -31,6 +31,7 @@ class Sign extends Component {
                         value={this.state.userName} 
                         onChange={this.handleChange}
                         style={styles.input}
+                        autofocus
                         
                     />
                     <button type="submit" style={styles.button}>Sign In</button>

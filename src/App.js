@@ -1,47 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './App.css';
-import Main from './Main';
-import Sign from './Sign';
+import './App.css'
+import SignIn from './SignIn'
+import Main from './Main'
 
 class App extends Component {
   state = {
-    user: {
-      uid: '023502',
-      userName: '', 
-      email: '',
-      
-    }
+    user: {},
   }
-  addUser=(userName)=> {
-    const user = [...this.state.user]; //breaks an array into varius pieces
-    console.log(user)
-    user.userName = userName;
-    //user.email = email;
-   
-   
-    this.setState({user});
-    //console.log(this.state.user.userName);
+
+  signedIn = () => {
+    return this.state.user.uid
   }
-  
+
+  handleAuth = (user) => {
+    this.setState({ user })
+  }
+
+  signOut = () => {
+    this.setState({ user: {} })
+  }
+
   render() {
-    
-    console.log("userName" + this.state.user.userName);
-    if(this.state.user.userName.length > 0){
-      console.log('yep');
-      return (
-        <div className="App">
-          <Main user={this.state.user}/>
-        </div>
-      )
-    }
-    else{
-      return (
-        <Sign user={this.state.user} addUser={this.addUser}/>
-      )
-    }
-   
+    return (
+      <div className="App">
+        {
+          this.signedIn()
+            ? <Main user={this.state.user} signOut={this.signOut} />
+            : <SignIn handleAuth={this.handleAuth} />
+        }
+      </div>
+    )
   }
 }
 
-export default App;
+export default App
