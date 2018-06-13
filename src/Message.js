@@ -2,8 +2,10 @@ import React from 'react';
 
 const Message = (props) => {
     return (
-        <div className="Message">
-            {props.message.userName}: {props.message.body}
+        <div className="Message" style={styles.Message}>
+            <div className="details" style = {styles.details}>
+                {props.message.userName}: {props.message.body}
+            </div>
         </div>
     )
 }

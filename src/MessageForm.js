@@ -17,15 +17,16 @@ class MessageForm extends Component {
     }
     render(){
         return (
-            <form className="MessageForm" onSubmit= {this.handleSubmit}>
+            <form className="MessageForm" style={styles.MessageForm} onSubmit= {this.handleSubmit}>
                 <input 
                     type="text" 
                     name="body" 
                     placeholder="Type a message..."
                     value={this.state.body} 
                     onChange={this.handleChange}
+                    style={styles.input}
                 />
-                <button type="submit">Send</button>
+                <button type="submit" style={styles.button}>Send</button>
             </form>
         )
     }
@@ -43,7 +44,7 @@ const styles = {
         padding: 1,
       },
       
-      chatIcon: { //.MessageForm .
+      chatIcon: { //.MessageForm . 
         display: 'flex',
         borderRadius: '0.5rem',
         alignItems: 'center',

@@ -3,12 +3,13 @@ import React from 'react';
 import Message from './Message';
 const MessageList = (props) => {
     return (
-        <div className="MessageList">
-            {
+        <div className="MessageList" style={styles.MessageList}>
+            <h3 style={styles.h3}>{
                 props.messages.map(msg => (
                     <Message key={msg.id} message= {msg} />
                 ))
             }
+            </h3>
         </div>
     )
 }
