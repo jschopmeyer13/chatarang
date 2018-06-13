@@ -33,6 +33,7 @@ class Chat extends Component {
             body,
         })
         this.setState({messages}); // could just put messages
+        
     }
     render() {
         return (

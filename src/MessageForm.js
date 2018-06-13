@@ -5,7 +5,6 @@ class MessageForm extends Component {
         body: '',
 
 
-        
     }
     handleSubmit = (ev) => {
         ev.preventDefault();
