@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 
 import Sidebar from './Sidebar'
 import Chat from './Chat'
+import Main from './Main';
 
-class Main extends Component {
+class Random extends Component {
   rooms = ['general', 'random'];
-  currentRoom = 'general';
+  currentRoom = 'random';
   render() {
     return (
       <div className="Main" style={styles}>

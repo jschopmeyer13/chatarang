@@ -12,7 +12,7 @@ const RoomList = () => {
           <a href="#" className={css(styles.link)}>general</a>
         </li>
         <li className={css(styles.item)}>
-          <a href="#" className={css(styles.link)}>random</a>
+          <a href="" className={css(styles.link)}>random</a>
         </li>
       </ul>
     </nav>
