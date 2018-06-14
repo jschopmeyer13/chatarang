@@ -1,49 +1,78 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 
-import RoomLink from './RoomLink';
+import RoomLink from './RoomLink'
+import RoomForm from './RoomForm'
 import base from './Base'
 
-class RoomList extends Component{
+class RoomList extends Component {
   state = {
-    rooms:{},
-   }
+    rooms: {},
+    showRoomForm: false,
+  }
+
   componentDidMount() {
     base.syncState(
       'rooms',
       {
-        context: this, 
+        context: this,
         state: 'rooms',
       }
     )
   }
 
+  showRoomForm = () => {
+    this.setState({ showRoomForm: true })
+  }
+
+  hideRoomForm = () => {
+    this.setState({ showRoomForm: false })
+  }
+
   addRoom = (room) => {
     const rooms = {...this.state.rooms}
     rooms[room.name] = room
-    this.setState({rooms});
+    this.setState({ rooms })
   }
+
   render() {
-    return (
+    if (this.state.showRoomForm) {
+      return (
+        <RoomForm
+          hideRoomForm={this.hideRoomForm}
+          addRoom={this.addRoom}
+        />
+      )
+    } else {
+      return (
         <nav
           className={`RoomList ${css(styles.nav)}`}
         >
-          <h2 className={css(styles.h2)}>Rooms</h2>
+          <div className={css(styles.heading)}>
+            <h2 className={css(styles.h2)}>Rooms</h2>
+            <button
+              className={css(styles.button)}
+              onClick={this.showRoomForm}
+            >
+              <i className="fas fa-plus-circle"></i>
+            </button>
+          </div>
           <ul className={css(styles.list)}>
             {
               Object.keys(this.state.rooms).map(
                 roomName => (
-                  <RoomLink 
-                  key={roomName}
-                  room={this.state.rooms[roomName]} 
-                  loadRoom={this.props.loadRoom}
-                />
+                  <RoomLink
+                    key={roomName}
+                    room={this.state.rooms[roomName]}
+                    loadRoom={this.props.loadRoom}
+                  />
                 )
               )
             }
           </ul>
         </nav>
-    )
+      )
+    }
   }
 }
 
@@ -62,21 +91,24 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
   },
 
-  item: {
-    marginBottom: '0.5rem',
+  heading: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
-  link: {
-    display: 'block',
-    color: 'whitesmoke',
-    textDecoration: 'none',
-
-    '::before': {
-      content: '"# "',
-    },
+  button: {
+    border: 0,
+    backgroundColor: 'transparent',
+    outline: 0,
+    padding: 0,
+    color: 'rgba(255,255,255,0.4)',
+    fontSize: '1rem',
+    cursor: 'pointer',
+    transition: 'color 0.25s ease-out',
 
     ':hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      color: 'white',
     }
   },
 })
