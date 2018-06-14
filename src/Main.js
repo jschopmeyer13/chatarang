@@ -4,8 +4,12 @@ import Sidebar from './Sidebar'
 import Chat from './Chat'
 
 class Main extends Component {
-  rooms = ['general', 'random'];
-  currentRoom = 'general';
+  state = {
+    room: {
+      name: 's2afternoon',
+      description: 'Ask questions and share code',      
+    },
+  }
   render() {
     return (
       <div className="Main" style={styles}>
@@ -13,7 +17,10 @@ class Main extends Component {
           user={this.props.user}
           signOut={this.props.signOut}
         />
-        <Chat user={this.props.user} />
+        <Chat 
+          user={this.props.user} 
+          room={this.state.room}
+        />
       </div>
     )
   }
