@@ -3,19 +3,19 @@ import React, { Component } from 'react';
 
 class Sign extends Component {
     state = {
-       userName: '',
+       displayName: '',
     }
     handleSubmit = (ev) => {
         ev.preventDefault();
 
-        this.props.addUser(this.state.userName);
+        this.props.addUser(this.state.displayName);
 
 
 
         
     }
     handleChange= (ev) => {
-        this.setState({userName: ev.target.value});
+        this.setState({displayName: ev.target.value});
     }
     //addUserName=(usr)=> {
         
@@ -28,7 +28,7 @@ class Sign extends Component {
                         type="text" 
                         name="body" 
                         placeholder="Type username..."
-                        value={this.state.userName} 
+                        value={this.state.displayName} 
                         onChange={this.handleChange}
                         style={styles.input}
                         autofocus
