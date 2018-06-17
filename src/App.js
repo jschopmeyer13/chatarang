@@ -39,7 +39,8 @@ class App extends Component {
       displayName: oauthUser.displayName,
       email: oauthUser.email,
       photoUrl: oauthUser.photoURL,
-      faceBook: oauthUser.facebook,
+      // facebook: oauthUser.facebook,
+      // github: oauthUser.github,
     }
     this.setState({ user })
     localStorage.setItem('user', JSON.stringify(user))
