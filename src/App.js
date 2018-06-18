@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
-import './App.css'
+import './App.css' 
 import { auth } from './Base'
 import SignIn from './SignIn'
 import Main from './Main'
