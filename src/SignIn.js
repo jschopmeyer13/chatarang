@@ -12,6 +12,7 @@ class SignIn extends Component {
 
   handleChange = (ev) => {
     this.setState({ email: ev.target.value })
+    // this.setState({time:ev.target.value})
   }
 
   handleSubmit = (ev) => {

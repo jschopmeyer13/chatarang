@@ -37,7 +37,7 @@ class App extends Component {
     const user = {
       uid: oauthUser.uid,
       displayName: oauthUser.displayName,
-      email: oauthUser.email,
+      // email: oauthUser.email,
       photoUrl: oauthUser.photoURL,
       // facebook: oauthUser.facebook,
       // github: oauthUser.github,
