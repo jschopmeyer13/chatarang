@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 class Sign extends Component {
     state = {
        displayName: '',
+       time: '',
     }
     handleSubmit = (ev) => {
         ev.preventDefault();

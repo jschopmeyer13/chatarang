@@ -70,7 +70,7 @@ class SignIn extends Component {
             </button>
             <button
               type="button"
-              className={css(styles.button)}
+              className={css(styles.buttonFacebook)}
               onClick={this.authenticateFacebook}
             >
               <i className={`fab fa-facebook ${css(styles.brandIcon)}`}></i>
@@ -78,7 +78,7 @@ class SignIn extends Component {
             </button>
             <button
               type="button"
-              className={css(styles.button)}
+              className={css(styles.buttonGithub)}
               onClick={this.authenticateGithub}
             >
               <i className={`fab fa-github ${css(styles.brandIcon)}`}></i>
@@ -161,7 +161,28 @@ const styles = StyleSheet.create({
     padding: '1rem 2rem',
     fontSize: '1.2rem',
     borderRadius: '1rem',
-    backgroundColor: '#ff3333',
+    backgroundColor: '#db3236',
+    color: 'white',
+    width: '20rem',
+  },
+  buttonGithub: {
+    display: 'block',
+    margin: '0 auto',
+    padding: '1rem 2rem',
+    fontSize: '1.2rem',
+    borderRadius: '1rem',
+    backgroundColor: '#c9510c',
+    color: 'white',
+    width: '20rem',
+  },
+  
+  buttonFacebook: {
+    display: 'block',
+    margin: '0 auto',
+    padding: '1rem 2rem',
+    fontSize: '1.2rem',
+    borderRadius: '1rem',
+    backgroundColor: '#3B5998',
     color: 'white',
     width: '20rem',
   },
