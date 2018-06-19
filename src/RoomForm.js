@@ -12,13 +12,15 @@ class RoomForm extends Component {
   }
 
   users = () => {
-    this.props.user.map(
-      user=> ({
-        label: user.displayname, 
-        value: user.uid,
-        
+    return Object.keys(this.props.users).map(
+      uid => {
+        const user = this.props.users[uid]
+        return{
+          value: uid,
+          label: `${user.displayName} (${user.email})`
+
+        }
       })
-    )
   }
 
   handleSubmit = (ev) => {
