@@ -9,8 +9,10 @@ class RoomForm extends Component {
     },
   }
 
-  handleSubmit = (ev) => {
+  handleSubmit = (ev, addRoom) => {
     ev.preventDefault()
+    alert(this.state.room.name)
+    alert(this.state.room.description)
     this.props.addRoom(this.state.room)
     this.props.history.goBack()
   }
