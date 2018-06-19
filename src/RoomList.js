@@ -7,30 +7,34 @@ import RoomForm from './RoomForm'
 import base from './Base'
 
 class RoomList extends Component {
-  // state = {
-  //   rooms: {},
-  // }
+  state = {
+    rooms: {},
+  }
 
-  // componentDidMount() {
-  //   base.syncState(
-  //     'rooms',
-  //     {
-  //       context: this,
-  //       state: 'rooms',
-  //     }
-  //   )
-  // }
+  componentDidMount() {
+    base.syncState(
+      'rooms',
+      {
+        context: this,
+        state: 'rooms',
+      }
+    )
+  }
 
-
+  addRoom = (room) => {
+    const rooms = {...this.state.rooms}
+    rooms[room.name] = room
+    this.setState({ rooms })
+  }
 
   render() {
     return (
       <Switch>
         <Route
           path="/rooms/new"
-          render={(navProps,addRoom) => (
+          render={navProps => (
             <RoomForm
-              addRoom={this.props.addRoom}
+              addRoom={this.addRoom}
               {...navProps}
             />
           )}
@@ -52,11 +56,11 @@ class RoomList extends Component {
                 </div>
                 <ul className={css(styles.list)}>
                   {
-                    Object.keys(this.props.rooms).map(
+                    Object.keys(this.state.rooms).map(
                       roomName => (
                         <RoomLink
                           key={roomName}
-                          room={this.props.rooms[roomName]}
+                          room={this.state.rooms[roomName]}
                         />
                       )
                     )

@@ -1,48 +1,51 @@
 import React, { Component } from 'react'
 
+import base from './Base'
 import Sidebar from './Sidebar'
 import Chat from './Chat'
-import base from './Base'
+
 class Main extends Component {
   state = {
     room: {},
     rooms: {},
   }
-  
 
   componentDidMount() {
-    this.loadRoom({
-      name: this.props.match.params.roomName,
-      
-    })
+    const { roomName } = this.props.match.params
+
     base.syncState(
       'rooms',
       {
         context: this,
         state: 'rooms',
+        then: () => this.loadRoom(roomName),
       }
     )
-  }
-  addRoom = (room) => {
-    const rooms = {...this.state.rooms}
-    rooms[room.name] = room
-    
-    this.setState({ rooms })
+
+
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.roomName !== this.props.match.params.roomName) {
-      if(Object.keys(this.state.rooms).length > 0) {
-        this.loadRoom({
-          name: this.props.match.params.roomName,
-          description: this.state.rooms[this.props.match.params.roomName].description
-        })
-      }
+      this.loadRoom(this.props.match.params.roomName)
     }
   }
 
-  loadRoom = (room) => {
-    this.setState({ room })
+  loadRoom = (roomName) => {
+    if (roomName === 'new') return null
+
+    const room = this.state.rooms[roomName]
+
+    if (room) {
+      this.setState({ room })
+    } else {
+      this.loadValidRoom()
+    }
+  }
+
+  loadValidRoom = () => {
+    const roomName = Object.keys(this.state.rooms)[0]
+    this.props.history.push(`/rooms/${roomName}`)
   }
 
   render() {
@@ -50,14 +53,11 @@ class Main extends Component {
       <div className="Main" style={styles}>
         <Sidebar
           user={this.props.user}
-          rooms={this.state.rooms}
           signOut={this.props.signOut}
-          addRoom={this.addRoom}
         />
         <Chat
           user={this.props.user}
           room={this.state.room}
-          
         />
       </div>
     )

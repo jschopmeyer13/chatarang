@@ -1,21 +1,16 @@
 import React from 'react'
+import moment from 'moment'
 
-const now = new Date()
 const Metadata = ({ message }) => {
-
-  function getTime(){
-    let currTime = message.id
-    currTime = new Date(message.id)
-    currTime = currTime.getMonth()+1 + '/' + currTime.getDate() + '/' + (currTime.getYear()-100) + ',  ' + currTime.getHours() + ':' + currTime.getMinutes()
-    return currTime;
-  }
   return (
     <div className="Metadata" style={styles.data}>
       <div className="user" style={styles.user}>
         {message.user.displayName}
       </div>
       <div className="time" style={styles.time}>
-        {getTime()}
+        <span title={moment(message.createdAt).format('D MMM @ h:mm a')}>
+          {moment(message.createdAt).fromNow()}
+        </span>
       </div>
     </div>
   )
@@ -38,4 +33,4 @@ const styles = {
   }
 }
 
-export default Metadata
+export default Metadata 
