@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
-import base, { auth } from './base'
+import base, { auth } from './Base'
 import SignIn from './SignIn'
 import Main from './Main'
 

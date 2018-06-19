@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import base from './base'
+import base from './Base'
 import Sidebar from './Sidebar'
 import Chat from './Chat'
 
@@ -22,6 +22,7 @@ class Main extends Component {
       }
     )
   }
+
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.roomName !== this.props.match.params.roomName) {
@@ -50,6 +51,7 @@ class Main extends Component {
   }
 
   removeRoom = (room) => {
+
     const rooms = {...this.state.rooms}
     rooms[room.name] = null
 
@@ -58,14 +60,25 @@ class Main extends Component {
       this.loadValidRoom
     )
   }
+  checkIfMember = (room) =>{
+    
+
+  }
 
   render() {
+    const arrRooms = Object.keys(this.state.rooms).filter(
+      roomName => this.state.rooms[roomName].public
+    ).map(roomName => this.state.rooms[roomName])
+
+
+  
     return (
       <div className="Main" style={styles}>
         <Sidebar
           user={this.props.user}
           users={this.props.users}
           signOut={this.props.signOut}
+          arrRooms = {arrRooms}
         />
         <Chat
           user={this.props.user}

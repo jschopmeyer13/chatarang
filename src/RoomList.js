@@ -4,7 +4,7 @@ import { Route, Switch, Link } from 'react-router-dom'
 
 import RoomLink from './RoomLink'
 import RoomForm from './RoomForm'
-import base from './base'
+import base from './Base'
 
 class RoomList extends Component {
   state = {
@@ -27,7 +27,10 @@ class RoomList extends Component {
     this.setState({ rooms })
   }
 
+
+
   render() {
+    
     return (
       <Switch>
         <Route
@@ -57,11 +60,11 @@ class RoomList extends Component {
                 </div>
                 <ul className={css(styles.list)}>
                   {
-                    Object.keys(this.state.rooms).map(
+                    Object.keys(this.props.arrRooms).map(
                       roomName => (
                         <RoomLink
                           key={roomName}
-                          room={this.state.rooms[roomName]}
+                          room={this.props.arrRooms[roomName]}
                         />
                       )
                     )
