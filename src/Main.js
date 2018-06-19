@@ -6,14 +6,14 @@ import base from './Base'
 class Main extends Component {
   state = {
     room: {},
-    rooms: [],
+    rooms: {},
   }
   
 
   componentDidMount() {
     this.loadRoom({
       name: this.props.match.params.roomName,
-      description: this.props.match.params.description,
+      
     })
     base.syncState(
       'rooms',
@@ -26,20 +26,22 @@ class Main extends Component {
   addRoom = (room) => {
     const rooms = {...this.state.rooms}
     rooms[room.name] = room
+    
     this.setState({ rooms })
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.roomName !== this.props.match.params.roomName) {
-      this.loadRoom({
-        name: this.props.match.params.roomName,
-        description: this.props.match.params.description,
-      })
+      if(Object.keys(this.state.rooms).length > 0) {
+        this.loadRoom({
+          name: this.props.match.params.roomName,
+          description: this.state.rooms[this.props.match.params.roomName].description
+        })
+      }
     }
   }
 
   loadRoom = (room) => {
-    alert(room.description)
     this.setState({ room })
   }
 
@@ -55,6 +57,7 @@ class Main extends Component {
         <Chat
           user={this.props.user}
           room={this.state.room}
+          
         />
       </div>
     )

@@ -50,6 +50,7 @@ class Chat extends Component {
     })
 
     this.setState({ messages })
+    
   }
 
   render() {
