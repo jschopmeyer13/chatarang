@@ -4,7 +4,7 @@ import { Route, Switch, Link } from 'react-router-dom'
 
 import RoomLink from './RoomLink'
 import RoomForm from './RoomForm'
-import base from './Base'
+import base from './base'
 
 class RoomList extends Component {
   state = {
@@ -35,6 +35,7 @@ class RoomList extends Component {
           render={navProps => (
             <RoomForm
               addRoom={this.addRoom}
+              users={this.props.users}
               {...navProps}
             />
           )}

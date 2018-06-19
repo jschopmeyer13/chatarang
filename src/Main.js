@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import base from './Base'
+import base from './base'
 import Sidebar from './Sidebar'
 import Chat from './Chat'
 
@@ -42,8 +42,11 @@ class Main extends Component {
   }
 
   loadValidRoom = () => {
-    const roomName = Object.keys(this.state.rooms)[0]
-    this.props.history.push(`/rooms/${roomName}`)
+    const realRoomName = Object.keys(this.state.rooms).find(
+      roomName => this.state.rooms[roomName]
+    )
+
+    this.props.history.push(`/rooms/${realRoomName}`)
   }
 
   removeRoom = (room) => {
@@ -61,6 +64,7 @@ class Main extends Component {
       <div className="Main" style={styles}>
         <Sidebar
           user={this.props.user}
+          users={this.props.users}
           signOut={this.props.signOut}
         />
         <Chat
