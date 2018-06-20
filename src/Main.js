@@ -60,15 +60,30 @@ class Main extends Component {
       this.loadValidRoom
     )
   }
-  checkIfMember = (room) =>{
-    
+  checkIfMember = (roomName) =>{
+    if(this.state.rooms[roomName].public){
+      return true
+    }
+    else{
+      const memberArray = this.state.rooms[roomName].members.map(member => 
+        this.props.user.uid === member.value
+      
+        )
+     
+     for(let i = 0; i < memberArray.length; i++){
+       if(memberArray[i] === true){
+         return true
+       }
+      }
+      return false
+
 
   }
+}
 
   render() {
     const arrRooms = Object.keys(this.state.rooms).filter(
-      roomName => this.state.rooms[roomName].public
-    ).map(roomName => this.state.rooms[roomName])
+      roomName => this.checkIfMember(roomName)).map(roomName => this.state.rooms[roomName])
 
 
   
