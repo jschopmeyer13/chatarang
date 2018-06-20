@@ -32,8 +32,9 @@ class Main extends Component {
 
   loadRoom = (roomName) => {
     if (roomName === 'new') return null
-
-    const room = this.state.rooms[roomName]
+    const room = this.memberArray()
+      .find(room => room.name === roomName)
+    // const room = this.state.rooms[roomName]
 
     if (room) {
       this.setState({ room })
@@ -60,42 +61,61 @@ class Main extends Component {
       this.loadValidRoom
     )
   }
-  
+
+  // start of code from class not used
   filteredRooms = () => {
-    
+    return this.filteredRoomNames()
+               .map(roomName => this.state.rooms[roomName])
   }
+
+  filteredRoomNames = () => {
+    return Object.keys(this.state.rooms)
+                 .filter(roomName => {
+                   const room = this.state.rooms[roomName]
+                   if (!room) return false
+
+                   return room.public || this.includesCurrentUser(room)
+                 })
+  }
+
+  includesCurrentUser = (room) => {
+    const members = room.members || []
+    return members.find(
+      userOption => userOption.value === this.props.user.uid
+    )
+  }
+  // end of code from class not used 
+
   checkIfMember = (roomName) =>{
     if(this.state.rooms[roomName]=== null){
       return false
-
     }
     else if(this.state.rooms[roomName].public){
       return true
     }
-    
     else{
       const memberArray = this.state.rooms[roomName].members.map(member => 
-        this.props.user.uid === member.value
-      
+        this.props.user.uid === member.value  
         )
-     
      for(let i = 0; i < memberArray.length; i++){
        if(memberArray[i] === true){
          return true
        }
       }
       return false
-
-
+    }
   }
-}
+
+  memberArray = () => (
+    Object.keys(this.state.rooms).filter(
+      roomName => this.checkIfMember(roomName)).map(roomName => this.state.rooms[roomName])
+  )
 
   render() {
-    const arrRooms = Object.keys(this.state.rooms).filter(
-      roomName => this.checkIfMember(roomName)).map(roomName => this.state.rooms[roomName])
-
-
-  
+    // const arrRooms = Object.keys(this.state.rooms).filter(
+    //   roomName => this.checkIfMember(roomName)).map(roomName => this.state.rooms[roomName])
+    const arrRooms = this.memberArray()
+    // console.log(this.filteredRooms())
     return (
       <div className="Main" style={styles}>
         <Sidebar
