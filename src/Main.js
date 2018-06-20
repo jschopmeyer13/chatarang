@@ -52,7 +52,7 @@ class Main extends Component {
   }
 
   loadRoom = (roomName) => {
-    if (roomName === 'new') return null
+    if (roomName === 'new' || roomName === 'new-direct-message') return null
 
     const room = this.filteredRooms()
                      .find(room => room.name === roomName)
@@ -73,6 +73,7 @@ class Main extends Component {
   }
 
   addRoom = (room) => {
+    room.displayName = room.name
     const { user } = this.props
     if (!room.public) {
       room.members.push({
