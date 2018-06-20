@@ -60,10 +60,19 @@ class Main extends Component {
       this.loadValidRoom
     )
   }
+  
+  filteredRooms = () => {
+    
+  }
   checkIfMember = (roomName) =>{
-    if(this.state.rooms[roomName].public){
+    if(this.state.rooms[roomName]=== null){
+      return false
+
+    }
+    else if(this.state.rooms[roomName].public){
       return true
     }
+    
     else{
       const memberArray = this.state.rooms[roomName].members.map(member => 
         this.props.user.uid === member.value
