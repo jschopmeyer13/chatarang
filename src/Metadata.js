@@ -1,7 +1,11 @@
 import React from 'react'
 import moment from 'moment'
+import EmojiList from './EmojiList'
 
-const Metadata = ({ message, emoji }) => {
+const Metadata = ({ message, emoji, emojis }) => {
+  // const emojiList = ({emoji}) => <li>{emoji.native}</li>
+  console.log(emojis)
+  console.log()
   return (
     <div className="Metadata" style={styles.data}>
       <div className="user" style={styles.user}>
@@ -13,10 +17,15 @@ const Metadata = ({ message, emoji }) => {
           {moment(message.createdAt).fromNow()}
         </span>
       </div>
-      <div className="emoji">
+   
+      <div className="emojis">
         {emoji.native}
+        {/* <ul>
+          {emojis.map((emoji, index) =>
+              <EmojiList key={index} emoji={emoji} />
+            )}
+         </ul> */}
       </div>
-      
     </div>
   )
 }
