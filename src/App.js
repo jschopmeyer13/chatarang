@@ -29,30 +29,24 @@ class App extends Component {
     auth.onAuthStateChanged(
       user => {
         if (user) {
-          // we signed in
           this.handleAuth(user)
         } else {
-          // we signed out
           this.handleUnauth()
         }
       }
     )
   }
 
-  signedIn = () => {
-    return this.state.user.uid
-  }
-
   handleAuth = (oauthUser) => {
     // Build the user object
     const user = {
+      email: oauthUser.email,
       uid: oauthUser.uid,
       displayName: oauthUser.displayName,
-      email: oauthUser.email,
       photoUrl: oauthUser.photoURL,
     }
 
-    // Update the list of users
+    // Add/update the user in the list
     const users = {...this.state.users}
     users[user.uid] = user
 
@@ -61,13 +55,17 @@ class App extends Component {
     localStorage.setItem('user', JSON.stringify(user))
   }
 
-  handleUnauth = () => {
-    this.setState({ user: {} })
-    localStorage.removeItem('user')
+  signedIn = () => {
+    return this.state.user.uid
   }
 
   signOut = () => {
     auth.signOut()
+  }
+
+  handleUnauth = () => {
+    this.setState({ user: {} })
+    localStorage.removeItem('user')
   }
 
   render() {
@@ -82,7 +80,7 @@ class App extends Component {
         <Switch>
           <Route
             path="/sign-in"
-            render={() => (
+            render={navProps => (
               this.signedIn()
                 ? <Redirect to="/rooms/general" />
                 : <SignIn />
@@ -92,11 +90,11 @@ class App extends Component {
             path="/rooms/:roomName"
             render={navProps => (
               this.signedIn()
-                ? <Main
-                    {...mainProps}
-                    {...navProps}
-                  />
-                : <Redirect to="/sign-in" />
+              ? <Main
+                  {...mainProps}
+                  {...navProps}
+                />
+              : <Redirect to="/sign-in" />
             )}
           />
           <Route

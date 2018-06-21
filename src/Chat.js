@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import ChatHeader from './ChatHeader'
 import MessageList from './MessageList'
 import MessageForm from './MessageForm'
+
 import base from './Base'
 
 class Chat extends Component {
@@ -15,7 +16,7 @@ class Chat extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.syncMessages()
   }
 
@@ -26,17 +27,18 @@ class Chat extends Component {
   }
 
   syncMessages = () => {
-    // Stop syncing with the current endpoint
     if (this.state.rebaseBinding) {
       base.removeBinding(this.state.rebaseBinding)
     }
 
-    // sync with the new endpoint
-    const rebaseBinding = base.syncState(`${this.props.room.name}/messages`, {
-      context: this,
-      state: 'messages',
-      asArray: true,
-    })
+    const rebaseBinding = base.syncState(
+      `${this.props.room.name}/messages`,
+      {
+        context: this,
+        state: 'messages',
+        asArray: true,
+      }
+    )
 
     this.setState({ rebaseBinding })
   }
