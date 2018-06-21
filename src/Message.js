@@ -20,6 +20,8 @@ class Message extends Component {
   handleEmojiSelect = (emoji) => {
     this.setState({emoji: emoji})
     this.state.emojis.push({emoji})
+    
+    console.log("emoji2 " + this.props.messages.emoji2)
     console.log(emoji)
     console.log(this.state.emojis)
     console.log(this.state.emoji)
@@ -28,6 +30,7 @@ class Message extends Component {
 
   render() {
     const { message } = this.props
+    console.log("messages"+ message)
     return (
       <div className={`Message ${css(styles.message)}`}>
         <Avatar user={message.user} />
@@ -37,6 +40,9 @@ class Message extends Component {
                     emojis={this.state.emojis}/>
           <div className="body">
             {message.body}
+          </div>
+          <div className="emoji">
+            {message.emoji}
           </div>
           <button
             className={css(styles.reactionButton)}
