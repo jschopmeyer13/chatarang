@@ -5,12 +5,11 @@ import { Picker } from 'emoji-mart'
 
 import Avatar from './Avatar'
 import Metadata from './Metadata'
+import Reaction from './Reaction'
 
 class Message extends Component {
   state = {
     showPicker: false,
-    emoji: '',
-    emojis: []
   }
 
   togglePicker = () => {
@@ -18,31 +17,35 @@ class Message extends Component {
   }
 
   handleEmojiSelect = (emoji) => {
-    this.setState({emoji: emoji})
-    this.state.emojis.push({emoji})
-    
-    console.log("emoji2 " + this.props.messages.emoji2)
-    console.log(emoji)
-    console.log(this.state.emojis)
-    console.log(this.state.emoji)
+    this.props.addReaction(this.props.message, emoji.colons)
     this.togglePicker()
   }
 
   render() {
     const { message } = this.props
-    console.log("messages"+ message)
+    const reactions = message.reactions || []
+
     return (
       <div className={`Message ${css(styles.message)}`}>
         <Avatar user={message.user} />
         <div className={css(styles.details)}>
-          <Metadata message={message} 
-                    emoji={this.state.emoji}
-                    emojis={this.state.emojis}/>
+          <Metadata message={message} />
           <div className="body">
             {message.body}
           </div>
-          <div className="emoji">
-            {message.emoji}
+          <div className={css(styles.reactionList)}>
+            {
+              Object.keys(reactions).map(
+                emoji => (
+                  <Reaction
+                    key={emoji}
+                    message={message}
+                    emoji={emoji}
+                    addReaction={this.props.addReaction}
+                  />
+                )
+              )
+            }
           </div>
           <button
             className={css(styles.reactionButton)}
@@ -97,6 +100,12 @@ const styles = StyleSheet.create({
     ':hover': {
       color: '#3366ff',
     },
+  },
+
+  reactionList: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginTop: '0.5rem',
   },
 })
 

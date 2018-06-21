@@ -43,16 +43,28 @@ class Chat extends Component {
     this.setState({ rebaseBinding })
   }
 
-  addMessage = (body, emoji2) => {
+  addMessage = (body) => {
     const messages = [...this.state.messages]
     messages.push({
       id: `${this.props.user.uid}-${Date.now()}`,
       user: this.props.user,
       body,
-      emoji2: '',
       createdAt: Date.now(),
+      reactions:{}
     })
 
+    this.setState({ messages })
+  }
+
+  addReaction = (message, emoji) => {
+    message.reactions = message.reactions || {}
+    message.reactions[emoji] =  message.reactions[emoji] || []
+    
+    message.reactions[emoji].push(this.props.user)
+
+    const messages = [...this.state.messages]
+    const i = messages.findIndex(msg => msg.id === message.id)
+    messages[i] = message
     this.setState({ messages })
   }
 
@@ -66,6 +78,7 @@ class Chat extends Component {
         <MessageList
           messages={this.state.messages}
           room={this.props.room}
+          addReaction={this.addReaction}
         />
         <MessageForm addMessage={this.addMessage} />
       </div>

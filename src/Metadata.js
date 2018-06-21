@@ -18,14 +18,14 @@ const Metadata = ({ message, emoji, emojis }) => {
         </span>
       </div>
    
-      <div className="emojis">
+      {/* <div className="emojis">
         {emoji.native}
         <ul>
           {emojis.map((emoji, index) =>
               <EmojiList key={index} emoji={emoji} />
             )}
          </ul>
-      </div>
+      </div> */}
     </div>
   )
 }
