@@ -30,7 +30,7 @@ class Message extends Component {
         <Avatar user={message.user} />
         <div className={css(styles.details)}>
           <Metadata message={message} 
-                    emoji={this.state.emoji.id}/>
+                    emoji={this.state.emoji}/>
           <div className="body">
             {message.body}
           </div>
